@@ -5,15 +5,30 @@
  */
 package Main;
 
+import java.util.StringTokenizer;
+import btnMenu.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.StreamTokenizer;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 /**
  *
  * @author kilroy
  */
 public class Principal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form Principal
-     */
+     FileNameExtensionFilter filtro= new FileNameExtensionFilter("Archivos Word y txt","docx","txt");
+    File f;
+    JFileChooser j= new JFileChooser();
+    String data1 [][]={};
+   String cabecera1[]={"No."," Token "," Tipo"};
+    String path;
+    int cont=0;
+    int errores;
+    String mensajini="";
+    String tipo="";
     public Principal() {
         initComponents();
     }
@@ -28,18 +43,85 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
         Texto_cod = new javax.swing.JEditorPane();
+        Lineas = new javax.swing.JEditorPane();
+        LineaError = new javax.swing.JEditorPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        Error = new javax.swing.JEditorPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        Abrir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jScrollPane2.setViewportView(Texto_cod);
+        Texto_cod.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Texto_cod.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                Texto_codKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                Texto_codKeyReleased(evt);
+            }
+        });
+
+        Lineas.setEditable(false);
+        Lineas.setText("1");
+        Lineas.setOpaque(false);
+
+        LineaError.setEditable(false);
+        LineaError.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        LineaError.setForeground(java.awt.Color.red);
+        LineaError.setToolTipText("");
+        LineaError.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(LineaError, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Lineas, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Texto_cod, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(Lineas, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE)
+            .addComponent(LineaError)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(Texto_cod, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jScrollPane2.setViewportView(jPanel1);
+
+        Error.setEditable(false);
+        Error.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        Error.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        Error.setForeground(java.awt.Color.blue);
+        jScrollPane5.setViewportView(Error);
 
         jMenu1.setText("Abrir");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        Abrir.setText("Abrir");
+        Abrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AbrirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(Abrir);
+
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Guardar");
@@ -58,20 +140,82 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(391, Short.MAX_VALUE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Texto_codKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Texto_codKeyPressed
+        StringTokenizer st = new StringTokenizer(Texto_cod.getText(),"\n",true);
+        String txt = "",token;
+        LineaError.setText("");
+        Error.setText("");
+        cont = 1;
+
+        while (st.hasMoreTokens()){
+            token= st.nextToken();
+            if("\n".equals(token)) cont++;
+        }
+
+        for(int i = 1; i <= cont; i++){
+            txt += i+"\n";
+        }
+        Lineas.setText(txt);
+    }//GEN-LAST:event_Texto_codKeyPressed
+
+    private void Texto_codKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Texto_codKeyReleased
+        StringTokenizer st = new StringTokenizer(Texto_cod.getText(),"\n",true);
+        String txt = "",token;
+        cont = 1;
+
+        while (st.hasMoreTokens()){
+            token= st.nextToken();
+            if("\n".equals(token)) cont++;
+        }
+
+        for(int i = 1; i <= cont; i++){
+            txt += i+"\n";
+        }
+        Lineas.setText(txt);
+    }//GEN-LAST:event_Texto_codKeyReleased
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        //no content
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
+       Abrir opn = new Abrir();
+        Texto_cod.setText(opn.getLectura());
+            int contador=0;
+            StringTokenizer st = new StringTokenizer(Texto_cod.getText(),"\n",true);
+            String Text = "",token;
+            contador = 1;
+
+            while (st.hasMoreTokens()){
+                token= st.nextToken();
+                if("\n".equals(token)) contador++;
+            }
+
+            for(int i = 1; i <= contador; i++){
+                Text += i+"\n";
+            }
+            Lineas.setText(Text);
+      
+    }//GEN-LAST:event_AbrirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,12 +253,18 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem Abrir;
+    private javax.swing.JEditorPane Error;
+    private javax.swing.JEditorPane LineaError;
+    public javax.swing.JEditorPane Lineas;
     public javax.swing.JEditorPane Texto_cod;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane5;
     // End of variables declaration//GEN-END:variables
 }

@@ -20,12 +20,14 @@ import Main.Principal;
  * @author kilroy
  */
 public class Abrir {
+    private String lectura="";
     JFileChooser j= new JFileChooser();
     FileNameExtensionFilter filtro= new FileNameExtensionFilter("Archivos Word y txt","docx","txt");
     String path;
     File f;
     Principal mn = new Principal();
-    public void abrir(){
+    
+    public Abrir(){
         j.setCurrentDirectory(new File("src\\lexicosintactico"));
         j.getSelectedFile();
         j.setFileFilter(filtro);//Añado el filtro
@@ -36,7 +38,7 @@ public class Abrir {
             //Aqui se manda la ruta del archivo
             path= j.getSelectedFile().getAbsolutePath();//Obtiene la Ruta
             String name=j.getSelectedFile().getName();//Obtiene el nombre
-            String lectura="";
+            
             f = new File(path);
 
             try{
@@ -51,36 +53,18 @@ public class Abrir {
                         contPalabra++;
 
                     }
-                    //lblPalabras.setText("Total de Palabras:"+contPalabra);
-                    //txtNombre.setText(name);
-                    //txtRuta.setText(path);
+                   
 
                 }
 
                 //Aqui empieza a leer el archivo linea por linea hasta que en el texto ya no haya nada
 
                 while((aux = br.readLine())!=null)
-
                 lectura = lectura+aux+"\n";//Voy acumulando todo en un string
 
-            }catch(IOException e){}
-
-            mn.Texto_cod.setText(lectura);//Mando lo que resulto de la lectura
-            int contador=0;
-            StringTokenizer st = new StringTokenizer(txtATexto1.getText(),"\n",true);
-            String Text = "",token;
-            contador = 1;
-
-            while (st.hasMoreTokens()){
-                token= st.nextToken();
-                if("\n".equals(token)) contador++;
+            }catch(IOException e){
+                 System.out.println("error "+e);
             }
-
-            for(int i = 1; i <= contador; i++){
-                Text += i+"\n";
-            }
-            Lineas.setText(Text);
-
             //contarCaracteres(lectura);//Mando llamar el metodo de contar caracteres
             //mayusculasyminusculas(lectura);
         }catch(NullPointerException e){
@@ -91,4 +75,15 @@ public class Abrir {
 
         }
     }
+    public void setLectura(String lectura) {
+        this.lectura = lectura;
+    }
+    
+    public String getLectura() {
+        return lectura;
+    }
+
+    
+    
+   
 }
