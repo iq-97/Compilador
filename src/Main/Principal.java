@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StreamTokenizer;
+import java.util.HashMap;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 /**
@@ -49,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         LineaError = new javax.swing.JEditorPane();
         jScrollPane5 = new javax.swing.JScrollPane();
         Error = new javax.swing.JEditorPane();
+        A_lexico = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Abrir = new javax.swing.JMenuItem();
@@ -111,6 +113,13 @@ public class Principal extends javax.swing.JFrame {
         Error.setForeground(java.awt.Color.blue);
         jScrollPane5.setViewportView(Error);
 
+        A_lexico.setText("Analisis Lexico");
+        A_lexico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                A_lexicoActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Opciones");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,9 +168,11 @@ public class Principal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(A_lexico)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -170,8 +181,10 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(A_lexico)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
@@ -237,6 +250,12 @@ public class Principal extends javax.swing.JFrame {
       
     }//GEN-LAST:event_AbrirActionPerformed
 
+    private void A_lexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_A_lexicoActionPerformed
+        HashMap <String,Integer> pr = new HashMap<>();
+        HashMap <String,Integer> op = new HashMap<>();
+        HashMap <String,Integer> ide = new HashMap<>();
+    }//GEN-LAST:event_A_lexicoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -273,6 +292,7 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton A_lexico;
     private javax.swing.JMenuItem Abrir;
     private javax.swing.JEditorPane Error;
     private javax.swing.JEditorPane LineaError;
