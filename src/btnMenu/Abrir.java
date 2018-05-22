@@ -20,15 +20,15 @@ import Main.Principal;
  * @author kilroy
  */
 public class Abrir {
+    //declaracion de variables
     private String lectura="";
     JFileChooser j= new JFileChooser();
     FileNameExtensionFilter filtro= new FileNameExtensionFilter("Archivos Word y txt","docx","txt");
     String path;
     File f;
-    Principal mn = new Principal();
+    
     
     public Abrir(){
-        j.setCurrentDirectory(new File("src\\lexicosintactico"));
         j.getSelectedFile();
         j.setFileFilter(filtro);//Añado el filtro
         j.showOpenDialog(j);
@@ -36,8 +36,8 @@ public class Abrir {
         int contPalabra=0;//Creo un contador para las palabras
         try{
             //Aqui se manda la ruta del archivo
-            path= j.getSelectedFile().getAbsolutePath();//Obtiene la Ruta
-            String name=j.getSelectedFile().getName();//Obtiene el nombre
+            path= j.getSelectedFile().getAbsolutePath();//Obtiene la Ruta completa
+            String name=j.getSelectedFile().getName();//Obtiene el nombre del archivo
             
             f = new File(path);
 
@@ -46,27 +46,25 @@ public class Abrir {
                 FileReader fr = new FileReader(f);
                 BufferedReader br = new BufferedReader(fr);
                 String aux;
-                //Aqui cuento cuantas palabras hay
+                //Aqui cuenta cuantas palabras hay
                 StreamTokenizer st=new StreamTokenizer(new FileReader(f));
-                while(st.nextToken()!=StreamTokenizer.TT_EOF){
-                    if(st.ttype==StreamTokenizer.TT_WORD){
-                        contPalabra++;
+                    while(st.nextToken()!=StreamTokenizer.TT_EOF){
+                        //ttype contiene el tipo de token que el metodo nextoken() acaba de leer convierte a int
+                        //TT_WORD indica que el token es una cadena
+                        if(st.ttype==StreamTokenizer.TT_WORD){
+                            contPalabra++;
 
+                        }
                     }
-                   
 
-                }
-
+                
                 //Aqui empieza a leer el archivo linea por linea hasta que en el texto ya no haya nada
-
                 while((aux = br.readLine())!=null)
-                lectura = lectura+aux+"\n";//Voy acumulando todo en un string
+                lectura = lectura+aux+"\n";//se acumula en un string
 
             }catch(IOException e){
                  System.out.println("error "+e);
             }
-            //contarCaracteres(lectura);//Mando llamar el metodo de contar caracteres
-            //mayusculasyminusculas(lectura);
         }catch(NullPointerException e){
 
             javax.swing.JOptionPane.showMessageDialog(j, "Has seleccionado cerrar programa, saliendo...");
@@ -81,9 +79,5 @@ public class Abrir {
     
     public String getLectura() {
         return lectura;
-    }
-
-    
-    
-   
+    }   
 }

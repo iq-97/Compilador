@@ -52,9 +52,13 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         Abrir = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -107,7 +111,7 @@ public class Principal extends javax.swing.JFrame {
         Error.setForeground(java.awt.Color.blue);
         jScrollPane5.setViewportView(Error);
 
-        jMenu1.setText("Abrir");
+        jMenu1.setText("Opciones");
         jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenu1ActionPerformed(evt);
@@ -122,15 +126,29 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu1.add(Abrir);
 
+        jMenuItem1.setText("Guardar");
+        jMenu1.add(jMenuItem1);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Guardar");
-        jMenuBar1.add(jMenu2);
-
         jMenu3.setText("Informacion");
+
+        jMenuItem2.setText("Creditos");
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem3.setText("Web");
+        jMenu3.add(jMenuItem3);
+
         jMenuBar1.add(jMenu3);
 
         jMenu4.setText("Ayuda");
+
+        jMenuItem4.setText("Documentacion");
+        jMenu4.add(jMenuItem4);
+
+        jMenuItem5.setText("Version");
+        jMenu4.add(jMenuItem5);
+
         jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
@@ -198,7 +216,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1ActionPerformed
 
     private void AbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirActionPerformed
-       Abrir opn = new Abrir();
+       //instanse de la lase Abrir
+        Abrir opn = new Abrir();
+        //envia a Texto_cod lo que se lee de getLectura
         Texto_cod.setText(opn.getLectura());
             int contador=0;
             StringTokenizer st = new StringTokenizer(Texto_cod.getText(),"\n",true);
@@ -259,10 +279,14 @@ public class Principal extends javax.swing.JFrame {
     public javax.swing.JEditorPane Lineas;
     public javax.swing.JEditorPane Texto_cod;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
