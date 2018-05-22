@@ -18,46 +18,45 @@ public class Analizador {
     
     
     public static void Op_Insert(String cadena){
-        StringTokenizer token = new StringTokenizer(cadena.toLowerCase());
+        StringTokenizer token = new StringTokenizer(cadena.toLowerCase()," ");
         String finCadena = new String();
-        String flag = "";
-        String flag2 = "";
-        String flag3 = "";
-        
         String tokenActual;
-        token.nextToken();
         tokenActual = token.nextToken();
         
-        //evaluar si la palabra into va despues de insert
-        if(! tokenActual.equals("into")){
-            JOptionPane.showMessageDialog(null, "Se esperaba la palabra reservadaa INTO, no '"+tokenActual+"'");
-            return;
-            
-        }else{ 
-            flag = "p1";
-            //evaluar ahora el nombre de la tabla
+        while(token.hasMoreTokens()){
             tokenActual = token.nextToken();
-            if(! Arrays.asList(tb_validas).contains(tokenActual)){
-                JOptionPane.showMessageDialog(null, "la tabla '"+tokenActual+"' NO EXISTE o no es una tabla");
-                return;
-            }else{ flag2 = "p2";
-              tokenActual = token.nextToken();
-                if(! tokenActual.equals("values")){
-                    JOptionPane.showMessageDialog(null,"Se esperaba la palabra reservada VALUES, no '"+tokenActual+"'");
+            if(tokenActual.contains("into")){
+                tokenActual = token.nextToken();
+                if(Arrays.asList(tb_validas).contains(tokenActual)){
+                    JOptionPane.showMessageDialog(null, "exito");
                     return;
-                }//else{flag3 = "p3";}  
+                }
+                else{
+                  if(!Arrays.asList(tb_validas).contains(tokenActual)){
+                    JOptionPane.showMessageDialog(null, "la tabla '"+tokenActual+"' NO EXISTE o no es una tabla");
+                    return;
+                    
+                    }
+                  /*if(tokenActual.contains("into")){
+                    JOptionPane.showMessageDialog(null, "No se ingreso nada");
+                    return;
+                    }*/
+                }
+            }
+            else{
+                
+                if(!tokenActual.contains("into")){
+                    JOptionPane.showMessageDialog(null, "Se esperaba la palabra reservadaa INTO, no '"+tokenActual+"'");
+                    return;                   
+                }
+                /*if(tokenActual.contains("insert")){
+                    JOptionPane.showMessageDialog(null, "No se ingreso nada");
+                    return;
+                }*/
+                
             }
         
         }
-        
-        
-        
-        
-        /*if(flag.equals("p1") && flag2.equals("p2") && flag3.equals("p3")){
-            JOptionPane.showMessageDialog(null, "Expresion correcta");
-        }*/
-        
-        
     }
     
 }
