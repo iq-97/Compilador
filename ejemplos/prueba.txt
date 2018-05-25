@@ -1,0 +1,14 @@
+start{ 
+$integer uno => 5;
+$integer dos => 4;
+$string mensaje => "hola mundo 1";
+if(uno <= 5){
+	for(uno => 0; uno > 5; uno++){
+		funcion(uno);
+	}
+}	
+end}
+
+$integer funcion($integer uno){
+	$integer dos;
+}
